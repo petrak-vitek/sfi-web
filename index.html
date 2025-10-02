@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jablka: rizika a jak se jim vyhnout</title>
+  <meta name="description" content="Střízlivý přehled skutečných rizik spojených s jablky a jablečnými produkty – bez strašení, bez zlehčování." />
+  <style>
+    :root{
+      --bg: #0b0e11;
+      --bg-muted:#10151b;
+      --card:#121820;
+      --text:#e8eef7;
+      --muted:#b7c2cf;
+      --accent:#e63946;
+      --ok:#2a9d8f;
+      --warn:#ffb703;
+      --border:#223043;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --radius: 16px;
+      --pad: clamp(14px, 2.2vw, 22px);
+      --w: min(1120px, 92vw);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f7fbff;
+        --bg-muted:#f1f5fa;
+        --card:#ffffff;
+        --text:#0c1a2b;
+        --muted:#4b5a6b;
+        --accent:#c81e2e;
+        --ok:#228c7a;
+        --warn:#b08900;
+        --border:#dbe6f3;
+        --shadow: 0 10px 25px rgba(0,0,0,.06);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.55}
+    a{color:var(--accent);text-underline-offset:3px}
+    header{
+      background: radial-gradient(1200px 500px at 20% -10%, rgba(230,57,70,.25), transparent 60%),
+                  radial-gradient(900px 400px at 80% 0%, rgba(42,157,143,.18), transparent 55%),
+                  var(--bg-muted);
+      border-bottom:1px solid var(--border);
+    }
+    .wrap{width:var(--w);margin-inline:auto;padding: clamp(18px,4vw,30px) var(--pad)}
+    .hero{
+      display:grid;
+      gap:18px;
+      grid-template-columns: 1.2fr 1fr;
+      align-items:center;
+    }
+    @media (max-width:900px){ .hero{grid-template-columns:1fr} }
+    .badge{
+      display:inline-flex;align-items:center;gap:.6ch;
+      background:linear-gradient(180deg,var(--card),var(--bg));
+      border:1px solid var(--border); padding:6px 10px; border-radius:999px;
+      font-size:12px; color:var(--muted)
+    }
+    .title{font-size: clamp(28px, 5vw, 44px); margin:6px 0 4px}
+    .subtitle{color:var(--muted);font-size: clamp(14px, 2.4vw, 18px);max-width:60ch}
+    .cta{
+      display:flex;gap:12px;flex-wrap:wrap;margin-top:12px
+    }
+    .btn{
+      background:var(--accent);color:white;border:none;border-radius:12px;
+      padding:12px 16px;font-weight:600;text-decoration:none;box-shadow:var(--shadow)
+    }
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border);box-shadow:none}
+    .illus{
+      background: conic-gradient(from 210deg at 60% 40%, rgba(230,57,70,.15), rgba(42,157,143,.15), rgba(255,183,3,.15), rgba(230,57,70,.15));
+      border:1px solid var(--border);border-radius:var(--radius); padding:24px; min-height:220px;
+      display:grid;place-items:center; box-shadow:var(--shadow)
+    }
+    .illus .emoji{font-size:70px;filter: drop-shadow(0 6px 20px rgba(0,0,0,.25))}
+    main section{padding: clamp(24px,4vw,40px) 0;border-bottom:1px solid var(--border)}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    @media (max-width:900px){ .kpis{grid-template-columns:repeat(2,1fr)} }
+    .kpi{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)
+    }
+    .kpi b{font-size:20px;display:block}
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+    @media (max-width:1000px){ .grid{grid-template-columns:1fr 1fr} }
+    @media (max-width:700px){ .grid{grid-template-columns:1fr} }
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      padding:20px; box-shadow:var(--shadow)
+    }
+    .card h3{margin:0 0 6px;font-size:20px}
+    .tag{display:inline-block;font-size:12px;color:var(--muted);border:1px dashed var(--border);padding:2px 8px;border-radius:999px;margin-right:6px}
+    details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+    details summary{cursor:pointer;font-weight:700}
+    .note{
+      display:flex;gap:10px;align-items:flex-start;background:linear-gradient(180deg,var(--bg-muted),transparent);
+      border:1px solid var(--border);border-radius:12px;padding:14px
+    }
+    .note strong{color:var(--warn)}
+    .footer{color:var(--muted);font-size:14px}
+    .list-check{padding-left:0;list-style:none}
+    .list-check li{padding-left:28px;position:relative;margin:10px 0}
+    .list-check li::before{content:"✓";position:absolute;left:0;top:0.1rem;color:var(--ok);font-weight:900}
+    .list-x li::before{content:"✕";color:var(--accent)}
+    .pill{display:inline-flex;gap:.5ch;align-items:center;background:var(--bg-muted);border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}
+    .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero" role="banner">
+      <div>
+        <span class="badge">🔎 Střízlivý pohled na rizika</span>
+        <h1 class="title">Jablka a jablečné produkty: jaká rizika skutečně existují</h1>
+        <p class="subtitle">Jablko je běžná potravina a většinou bezpečná. Přesto má svá <strong>reálná úskalí</strong> — od alergií přes pecky až po cukr v průmyslových nápojích. Tady je všechno na jednom místě, bez růžových brýlí.</p>
+        <div class="cta">
+          <a class="btn" href="#rizika">Přejít na rizika</a>
+          <a class="btn secondary" href="#prevence">Jak se chránit</a>
+        </div>
+      </div>
+      <div class="illus" aria-hidden="true">
+        <div class="emoji">🍎⚠️</div>
+      </div>
+    </div>
+  </header>
+
+  <main id="obsah">
+    <section class="wrap" id="rychly-prehled" aria-labelledby="rychly-prehled-nadpis">
+      <h2 id="rychly-prehled-nadpis">Rychlý přehled</h2>
+      <div class="kpis" role="list">
+        <div class="kpi" role="listitem">
+          <span class="tag">Alergie</span>
+          <b>Orální alergický syndrom</b>
+          <small class="muted">Svědění rtů a krku u citlivých osob (často křížová reakce s pylovou alergií).</small>
+        </div>
+        <div class="kpi" role="listitem">
+          <span class="tag">Pecky</span>
+          <b>Amigdalin v semenech</b>
+          <small>Po rozkousání se může uvolnit kyanovodík. Malé množství obvykle nevadí; hrsti pecek už problém být mohou.</small>
+        </div>
+        <div class="kpi" role="listitem">
+          <span class="tag">Nápoje</span>
+          <b>Vysoký obsah cukru</b>
+          <small>Džusy a mošty mají hodně cukru a nízký obsah vlákniny — rychle zvedají glykémii.</small>
+        </div>
+        <div class="kpi" role="listitem">
+          <span class="tag">Výroba</span>
+          <b>Rezidua pesticidů</b>
+          <small>U špatně omytých plodů mohou zůstat zbytky postřiků.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="rizika" aria-labelledby="rizika-nadpis">
+      <h2 id="rizika-nadpis">Konkrétní rizika</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>1) Alergie a křížové reakce</h3>
+          <p>Syrové jablko může u některých lidí vyvolat <strong>orální alergický syndrom</strong> (svědění rtů, patra, krku). Často souvisí s alergií na pyl břízy. Tepelná úprava alergen obvykle denaturuje.</p>
+          <ul class="list-x list-check">
+            <li>Riziko: mírné až střední (nepříjemné, výjimečně vážnější reakce).</li>
+            <li>Vyšší pozor u dětí s diagnostikovanou potravinovou alergií.</li>
+          </ul>
+          <p class="pill" aria-label="Tip: zpracování">💡 Tip: Zkuste kompot/pečené jablko — tepelná úprava často pomůže.</p>
+        </article>
+
+        <article class="card">
+          <h3>2) Semena (pecky) a kyanovodík</h3>
+          <p>Jablečná semena obsahují <strong>amigdalin</strong>. Po rozkousání a metabolizaci může vzniknout <em>kyanovodík</em>. Náhodné spolknutí pár pecek tělem obvykle projde bez rozkousání — problém je <strong>záměrné</strong> pojídání většího množství.</p>
+          <ul class="list-x list-check">
+            <li>Riziko: nízké při běžné konzumaci celých jablek.</li>
+            <li>Vyhněte se rozkousávání a „mlýnkování“ pecek pro účelné pojídání.</li>
+          </ul>
+          <p class="pill">⚠️ Dětem pecky nenechávejte „na hraní“ – hrozí i vdechnutí.</p>
+        </article>
+
+        <article class="card">
+          <h3>3) Džusy, mošty, pyré a přesnídávky</h3>
+          <p>Tekuté či rozmixované formy mají <strong>hodně volného cukru</strong> a málo vlákniny. Glykémie a inzulín vyletí rychleji než po celém plodu.</p>
+          <ul class="list-x list-check">
+            <li>Riziko: u dětí, diabetiků a při redukci hmotnosti.</li>
+            <li>„Bez přidaného cukru“ ≠ nízký cukr; fruktóza je pořád cukr.</li>
+          </ul>
+          <p class="pill">🥤 Lepší: zůstat u celého jablka, popř. ředit mošt vodou 1:1.</p>
+        </article>
+
+        <article class="card">
+          <h3>4) Tvrdé sušené křížaly a zuby</h3>
+          <p>Sušené produkty jsou <strong>lepkavé a koncentrovaně sladké</strong>. Snadno se přilepí do fisur zubů a podporují kaz.</p>
+          <ul class="list-x list-check">
+            <li>Riziko: časté mlsání bez následné hygieny.</li>
+            <li>Zubní plak + cukr = kyselé prostředí a demineralizace.</li>
+          </ul>
+          <p class="pill">🪥 Po sušeném ovoci vyčkejte ~20–30 min a až pak čistěte zuby.</p>
+        </article>
+
+        <article class="card">
+          <h3>5) Pesticidy a povrch</h3>
+          <p>Komerčně pěstovaná jablka mohou mít <strong>rezidua pesticidů</strong> na slupce. Většinu odstraní důkladné mytí, případně loupání.</p>
+          <ul class="list-x list-check">
+            <li>Riziko: nízké až střední podle původu a zpracování.</li>
+            <li>Domácí mytí ve studené vodě s mechanikou (kartáček) pomáhá.</li>
+          </ul>
+          <p class="pill">🧽 Nepoužívejte saponát – není určený k jídlu.</p>
+        </article>
+
+        <article class="card">
+          <h3>6) Alkoholické výrobky (cidery, kalvádos)</h3>
+          <p>Jablečný cider a destiláty nesou <strong>stejná rizika jako jiné alkoholické nápoje</strong> – od akutní intoxikace po dlouhodobé poškození zdraví.</p>
+          <ul class="list-x list-check">
+            <li>Riziko: vysoké při nadměrné konzumaci; <span class="pill">❌ nevhodné v těhotenství</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="prevence" aria-labelledby="prevence-nadpis">
+      <h2 id="prevence-nadpis">Jak rizika omezit</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Praktické kroky</h3>
+          <ul class="list-check">
+            <li>Jezte spíš <strong>celá jablka</strong> než džusy a přesnídávky.</li>
+            <li>Jablka <strong>myjte a otírejte</strong>; u dětí volte menší, tvrdé kousky krájejte na plátky.</li>
+            <li><strong>Nerozkoušejte</strong> a nepolykejte záměrně větší množství pecek.</li>
+            <li>Máte-li alergii na pyl břízy, zvažte <strong>tepelně upravené</strong> jablko.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Pro koho si dát větší pozor</h3>
+          <ul class="list-check">
+            <li>Děti (dušení tvrdými kusy, lepkavé sušené plátky).</li>
+            <li>Lidé s <strong>diabetem</strong> – hlídejte porce a formu.</li>
+            <li>Těhotné a osoby na <strong>nízkopesticidní dietě</strong>.</li>
+            <li>Diagnostikovaní alergici (poraďte se s alergologem).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Co není problém</h3>
+          <ul class="list-check">
+            <li>Spolknutí pár <strong>celých</strong> pecek – obvykle projdou trávicím traktem nedotčené.</li>
+            <li>1 střední jablko denně u zdravého člověka – <strong>v pořádku</strong> v rámci pestré stravy.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note" role="note" aria-label="Upřesnění">
+        <div aria-hidden="true">ℹ️</div>
+        <p><strong>Nejedná se o lékařské doporučení.</strong> Pokud máte po jablku výrazné potíže (otékání, dýchání, vyrážka), řešte to <u>hned</u> s lékařem.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="faq" aria-labelledby="faq-nadpis">
+      <h2 id="faq-nadpis">Časté otázky</h2>
+      <details>
+        <summary>Je jíst jablka bezpečné?</summary>
+        <p>Ano, pro většinu lidí ano. Tato stránka jen shrnuje <em>situace, kdy pozor</em>.</p>
+      </details>
+      <details>
+        <summary>Kolik pecek je už moc?</summary>
+        <p>Záměrné pojídání hrstí pecek je nerozumné. Občasné spolknutí pár <strong>nerozkousaných</strong> pecek běžně nevadí.</p>
+      </details>
+      <details>
+        <summary>Jsou bio jablka lepší?</summary>
+        <p>Mohou mít méně reziduí některých pesticidů. Pořád je myjte. Nutričně záleží víc na <em>celkovém jídelníčku</em>.</p>
+      </details>
+    </section>
+
+    <section class="wrap footer" id="zdroje">
+      <p>Tip: Chcete přidat seznam literatury? Vložte odkazy na oficiální doporučení (alergologie, toxikologie, zubní hygiena) a studie o cukru v džusech.</p>
+      <p>Poslední úprava: <time datetime="2025-10-02">2. října 2025</time></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer">
+      <p>© 2025 – Stručně, bez nátěru na růžovo.</p>
+    </div>
+  </footer>
+</body>
+</html>
